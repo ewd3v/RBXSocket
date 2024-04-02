@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ewd3w/RBXSocket.git"
+    "url": "git+https://github.com/ewd3v/RBXSocket.git"
   },
   "keywords": [
     "WebSocket",
@@ -18,7 +18,7 @@
   "author": "ewd3v",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ewd3w/RBXSocket/issues"
+    "url": "https://github.com/ewd3v/RBXSocket/issues"
   },
-  "homepage": "https://github.com/ewd3w/RBXSocket#readme"
+  "homepage": "https://github.com/ewd3v/RBXSocket#readme"
 }
