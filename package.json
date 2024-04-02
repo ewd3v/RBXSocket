@@ -1,6 +1,6 @@
 {
   "name": "rbx-socket",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A 'WebSocket' implementation in Roblox by utilizing longpolling.",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,9 @@
   "keywords": [
     "WebSocket",
     "Roblox",
-    "Longpolling"
+    "longpolling",
+    "http",
+    "https"
   ],
   "author": "ewd3v",
   "license": "MIT",
