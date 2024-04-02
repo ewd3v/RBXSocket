@@ -1,0 +1,24 @@
+{
+  "name": "rbx-socket",
+  "version": "1.0.0",
+  "description": "A 'WebSocket' implementation in Roblox by utilizing longpolling.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ewd3w/RBXSocket.git"
+  },
+  "keywords": [
+    "WebSocket",
+    "Roblox",
+    "Longpolling"
+  ],
+  "author": "ewd3v",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ewd3w/RBXSocket/issues"
+  },
+  "homepage": "https://github.com/ewd3w/RBXSocket#readme"
+}
