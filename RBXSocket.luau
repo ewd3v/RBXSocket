@@ -216,7 +216,7 @@ end
 
 function Socket:terminate()
 	if self.state == states.OPEN then
-		self.__events.close:Fire(1001, "socket was terminated")
+		self.__events.close:Fire(1000, "socket was terminated")
 	end
 	self.state = states.CLOSED
 
