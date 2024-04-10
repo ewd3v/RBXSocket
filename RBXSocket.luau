@@ -32,6 +32,12 @@ end
 function Socket.new(url: string, options: socketOptions?)
 	local socketOptions = options or {} :: socketOptions
 
+	if socketOptions.maxPoolSize > 2 then
+		warn(
+			"It is not reccomended to set maxConnectionPoolSize to a value greater than 2 (Roblox likes to not send requests when there are already 3 being sent)."
+		)
+	end
+
 	local self = setmetatable({}, Socket)
 	self.url = url
 	self.maxPoolSize = socketOptions.maxPoolSize or 2
