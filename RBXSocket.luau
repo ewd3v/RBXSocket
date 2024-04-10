@@ -32,9 +32,9 @@ end
 function Socket.new(url: string, options: socketOptions?)
 	local socketOptions = options or {} :: socketOptions
 
-	if socketOptions.maxPoolSize > 2 then
+	if socketOptions.maxPoolSize and socketOptions.maxPoolSize > 2 then
 		warn(
-			"It is not reccomended to set maxConnectionPoolSize to a value greater than 2 (Roblox likes to not send requests when there are already 3 being sent)."
+			"It is not recommended to set maxConnectionPoolSize to a value greater than 2 (Roblox likes to not send requests when there are already 3 being sent)."
 		)
 	end
 
@@ -130,6 +130,13 @@ function Socket:__poll()
 		})
 
 		if not success then
+			if response == "HttpError: Unknown" then
+				-- This is triggered when the connection is closed by the server, i.e socket was terminated.
+				-- I'm unsure if this can be triggered by anything else, and if so this method of detecting when the socket is terminated should change.
+
+				return self:close(1000, "socket was terminated by server")
+			end
+
 			-- Add back the data we took to the buffer array.
 			for _, data in ipairs(buffered) do
 				table.insert(self.__buffer, data)
@@ -144,10 +151,10 @@ function Socket:__poll()
 
 		if response.StatusCode == 404 then
 			-- The socketId is no longer valid on the server.
-			return self:close(1001, "server closed socket")
+			return self:close(1000, "socket was closed by server")
 		elseif response.StatusCode == 500 then
 			-- The socketId is no longer valid on the server.
-			return self:close(1001, "internal server error")
+			return self:close(1002, "internal server error")
 		end
 
 		if not response.Success and response.StatusCode ~= 410 then
@@ -177,10 +184,10 @@ function Socket:close(code: number?, reason: string?)
 	if self.state == states.CLOSING or self.state == states.CLOSED then
 		return
 	end
+	self.state = states.CLOSING
 
 	local closeCode = code or 1000
 	self.__events.close:Fire(closeCode, reason)
-	self.state = states.CLOSING
 
 	local requestData = {
 		Url = self.url,
